@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html> 
+
+<head> 
+	<title> 
+		jQuery getJSON() Method 
+	</title> 
+</head> 
+	
+<body> 
+	<select id="locality-dropdown" name="locality">
+    </select>
+	<p id = "returnJSON" name = 'returned'></p>
+</body> 
+
+<script src= 
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
+</script> 
+<!-- Script to get JSON file and display its content --> 
+<script type = "text/javascript" language="javascript"> 
+    let dropdown = $('#locality-dropdown');
+    let return_text = $('#returnJSON');
+    //Empties the dropdown before script is run
+    dropdown.empty();
+    return_text.empty();
+
+    dropdown.append('<option selected="true" disabled>Choose State/Province</option>');
+    dropdown.prop('selectedIndex', 0);
+
+
+
+    const url1 = 'https://api.npoint.io/ffee0cd9cb427dc5bc08';
+
+    // Populate dropdown with list of provinces
+    $.getJSON(url1, function (data) {
+        $.each(data, function (key, entry) {
+            dropdown.append($('<option></option>').attr('value', entry.abbreviation).text(entry.name));
+        })
+    });
+</script> 
+</html> 
